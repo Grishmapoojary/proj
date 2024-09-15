@@ -1,4 +1,4 @@
-<html>
+<html></html>
 <head>
   <title>Steganography Online</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -9,7 +9,10 @@
     <div class="page-header">
       <h1>Steganography Online</h1>
     </div>
-
+   
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+  
     <ul class="nav nav-tabs" id="tabs" data-tabs="tabs">
       <li role="presentation" class="active"> <a href="#encode" data-toggle="tab">Encode</a></li>
       <li role="presentation"> <a href="#decode" data-toggle="tab">Decode</a></li>
@@ -65,6 +68,29 @@
           </div>
         </div>
       </div>
+<!-- Steganolysis Section -->
+<div class="container steganolysis">
+    <div class="page-header">
+        <h1>Steganolysis</h1>
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#steganolysis-check" data-toggle="tab">Check Image</a></li>
+        <li><a href="#steganolysis-results" data-toggle="tab">Results</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="steganolysis-check">
+            <div class="form-group">
+                <label for="steganolysisFile">Select Image for Analysis</label>
+                <input type="file" id="steganolysisFile" name="steganolysisFile" class="form-control" accept="image/*" onchange="previewSteganolysisImage()">
+            </div>
+        </div>
+        <div class="tab-pane" id="steganolysis-results">
+            <h2>Analysis Results</h2>
+            <textarea class="form-control" readonly></textarea>
+        </div>
+    </div>
+</div>
+
 
       <div class="tab-pane" id="decode">
         <div>
