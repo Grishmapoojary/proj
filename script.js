@@ -171,3 +171,47 @@ function saveImage() {
   link.download = 'encoded_image.png';
   link.click();
 }
+function previewSteganolysisImage() {
+  var file = document.querySelector('input[name=steganolysisFile]').files[0];
+  
+  if (file) {
+      var reader = new FileReader();
+      var image = new Image();
+      
+      reader.readAsDataURL(file);
+      
+      reader.onloadend = function() {
+          image.src = URL.createObjectURL(file);
+          
+          image.onload = function() {
+              // Process the image for steganolysis
+              var canvas = document.createElement('canvas');
+              canvas.width = image.width;
+              canvas.height = image.height;
+              var context = canvas.getContext('2d');
+              context.drawImage(image, 0, 0);
+              
+              // Analyze image data
+              var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+              var binaryMessage = '';
+              
+              for (var i = 0; i < imageData.data.length; i += 4) {
+                  for (var offset = 0; offset < 3; offset++) {
+                      binaryMessage += (imageData.data[i + offset] % 2).toString();
+                  }
+              }
+              
+              var output = '';
+              for (var i = 0; i < binaryMessage.length; i += 8) {
+                  var charCode = parseInt(binaryMessage.slice(i, i + 8), 2);
+                  if (charCode === 0) break; // Assuming null terminator for simplicity
+                  output += String.fromCharCode(charCode);
+              }
+              
+              // Display results
+              document.querySelector('#steganolysis-results textarea').textContent = output;
+              $('.nav-tabs a[href="#steganolysis-results"]').tab('show');
+          }
+      }
+  }
+}
